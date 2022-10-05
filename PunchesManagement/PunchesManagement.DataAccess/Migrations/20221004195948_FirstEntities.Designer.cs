@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PunchesManagement.DataAccess;
 
@@ -11,9 +12,10 @@ using PunchesManagement.DataAccess;
 namespace PunchesManagement.DataAccess.Migrations
 {
     [DbContext(typeof(PunchesManagementContext))]
-    partial class PunchesManagementContextModelSnapshot : ModelSnapshot
+    [Migration("20221004195948_FirstEntities")]
+    partial class FirstEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,9 +33,11 @@ namespace PunchesManagement.DataAccess.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Output")
@@ -74,6 +78,7 @@ namespace PunchesManagement.DataAccess.Migrations
                         .HasColumnType("decimal(6,2)");
 
                     b.Property<string>("Series")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Size")
@@ -103,60 +108,19 @@ namespace PunchesManagement.DataAccess.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("NumberOfStation")
                         .HasColumnType("int");
 
                     b.Property<string>("Producer")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("TabletPresses");
-                });
-
-            modelBuilder.Entity("PunchesManagement.DataAccess.Entities.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UserRoleId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserRoleId");
-
-                    b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("PunchesManagement.DataAccess.Entities.UserRole", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("UserRoles");
                 });
 
             modelBuilder.Entity("PunchesManagement.DataAccess.Entities.Product", b =>
@@ -179,17 +143,6 @@ namespace PunchesManagement.DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("TabletPress");
-                });
-
-            modelBuilder.Entity("PunchesManagement.DataAccess.Entities.User", b =>
-                {
-                    b.HasOne("PunchesManagement.DataAccess.Entities.UserRole", "UserRole")
-                        .WithMany()
-                        .HasForeignKey("UserRoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("UserRole");
                 });
 
             modelBuilder.Entity("PunchesManagement.DataAccess.Entities.TabletPress", b =>

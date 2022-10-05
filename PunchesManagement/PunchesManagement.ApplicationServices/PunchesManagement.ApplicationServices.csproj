@@ -13,7 +13,6 @@
   <ItemGroup>
     <Folder Include="API\Domain\Models\" />
     <Folder Include="API\Handlers\" />
-    <Folder Include="Mappings\" />
   </ItemGroup>
 
   <ItemGroup>
