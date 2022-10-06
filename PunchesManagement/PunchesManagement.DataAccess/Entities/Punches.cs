@@ -16,4 +16,10 @@ public class Punches : EntityBase
 
     public int TabletPressId { get; set; }
     public virtual TabletPress TabletPress { get; set; }
+
+    public int ManufacturerId { get; set; }
+    public virtual Manufacturer Manufacturer { get; set; }
+
+    public int TypesId { get; set; }
+    public virtual Types Types { get; set; }
 }

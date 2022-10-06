@@ -23,6 +23,20 @@ public class DataSeeder
                 _context.UserRoles.AddRange(userRoles);
                 _context.SaveChanges();
             }
+
+            if (!_context.Manufacturer.Any())
+            {
+                var manufacturers = GetManufacturers();
+                _context.Manufacturer.AddRange(manufacturers);
+                _context.SaveChanges();
+            }
+
+            if (!_context.Types.Any())
+            {
+                var types = GetTypes();
+                _context.Types.AddRange(types);
+                _context.SaveChanges();
+            }
         }
     }
 
@@ -49,5 +63,43 @@ public class DataSeeder
             };
 
         return roles;
+    }
+
+    private IEnumerable<Manufacturer> GetManufacturers()
+    {
+        var manufacturers = new List<Manufacturer>()
+            {
+                new Manufacturer()
+                {
+                    Name = "Adamus"
+                },
+                new Manufacturer()
+                {
+                    Name = "Jato"
+                },
+                new Manufacturer()
+                {
+                    Name = "Manesty"
+                }
+            };
+
+        return manufacturers;
+    }
+
+    private IEnumerable<Types> GetTypes()
+    {
+        var types = new List<Types>()
+            {
+                new Types()
+                {
+                    Name = "Euro B"
+                },
+                new Types()
+                {
+                    Name = "Euro D"
+                }
+            };
+
+        return types;
     }
 }

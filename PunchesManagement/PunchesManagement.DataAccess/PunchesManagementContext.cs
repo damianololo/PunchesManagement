@@ -16,5 +16,7 @@ public class PunchesManagementContext : DbContext
 
     public DbSet<TabletPress> TabletPresses { get; set; }
     public DbSet<Punches> Punches { get; set; }
+    public DbSet<Manufacturer> Manufacturer { get; set; }
+    public DbSet<Types> Types { get; set; }
     public DbSet<Product> Products { get; set; }
 }

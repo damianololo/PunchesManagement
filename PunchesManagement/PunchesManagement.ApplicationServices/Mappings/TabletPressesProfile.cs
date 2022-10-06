@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AutoMapper;
+using PunchesManagement.ApplicationServices.API.Domain.Models;
 
-namespace PunchesManagement.ApplicationServices.Mappings
+namespace PunchesManagement.ApplicationServices.Mappings;
+
+public class TabletPressesProfile : Profile
 {
-    public class TabletPressesProfile
-    {
-
+	public TabletPressesProfile()
+	{
+        CreateMap<DataAccess.Entities.TabletPress, TabletPress>()
+           .ForMember(x => x.Name, y => y.MapFrom(z => z.Name))
+           .ForMember(x => x.NumberOfStation, y => y.MapFrom(z => z.NumberOfStation));
     }
 }
