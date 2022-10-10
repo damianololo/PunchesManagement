@@ -9,17 +9,16 @@ public class Punches : EntityBase
     [Required]
     public string Size { get; set; }
     public string Series { get; set; }
-    public DateTime UsingDate { get; set; }  //UsingDate stamps == ProductionTime products!!
     [Precision(6, 2)]
     public decimal MachineHour { get; set; }
     public bool InInspection { get; set; }
 
-    public int TabletPressId { get; set; }
-    public virtual TabletPress TabletPress { get; set; }
+    public List<TabletPress> TabletPress { get; set; }
+    //public List<TabletPressPunches> TabletPressPunches { get; set; }
 
+    public Manufacturer Manufacturer { get; set; }
     public int ManufacturerId { get; set; }
-    public virtual Manufacturer Manufacturer { get; set; }
 
+    public Types Types { get; set; }
     public int TypesId { get; set; }
-    public virtual Types Types { get; set; }
 }

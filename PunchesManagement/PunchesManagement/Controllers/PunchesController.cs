@@ -23,4 +23,13 @@ public class PunchesController : ControllerBase
 
 		return Ok(response);
 	}
+
+	[HttpPost]
+	[Route("")]
+	public async Task<IActionResult> AddPunches([FromBody] AddPunchesRequest request)
+	{
+		var response = await _mediator.Send(request);
+
+		return Ok(response);
+	}
 }

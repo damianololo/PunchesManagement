@@ -6,7 +6,11 @@ public class TabletPress : EntityBase
     public string Producer { get; set; }
     public int NumberOfStation { get; set; }
 
-    public virtual List<Punches> Punches { get; set; }
+    public Types Types { get; set; }
+    public int TypesId { get; set; }
 
-    public virtual List<Product> Products { get; set; }
+    public List<Punches> Punches { get; set; }
+    //public List<TabletPressPunches> TabletPressPunches { get; set; }
+
+    public List<Product> Products { get; set; }
 }

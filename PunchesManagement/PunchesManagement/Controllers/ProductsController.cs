@@ -23,4 +23,13 @@ public class ProductsController : ControllerBase
 
 		return Ok(response);
 	}
+
+    [HttpGet]
+    [Route("{id}")]
+	public async Task<IActionResult> GetProduct([FromQuery]GetProductRequest request, [FromRoute]int id)
+	{
+		var response = await _mediator.Send(request);
+
+		return Ok(response);
+	}
 }

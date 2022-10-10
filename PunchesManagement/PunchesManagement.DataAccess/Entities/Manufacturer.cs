@@ -4,5 +4,5 @@ public class Manufacturer : EntityBase
 {
     public string Name { get; set; }
 
-    public virtual Punches Punches { get; set; }
+    public List<Punches> Punches { get; set; } = new List<Punches>();
 }

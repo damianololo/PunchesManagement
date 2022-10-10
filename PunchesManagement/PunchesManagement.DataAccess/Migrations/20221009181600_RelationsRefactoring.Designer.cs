@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PunchesManagement.DataAccess;
 
@@ -11,9 +12,10 @@ using PunchesManagement.DataAccess;
 namespace PunchesManagement.DataAccess.Migrations
 {
     [DbContext(typeof(PunchesManagementContext))]
-    partial class PunchesManagementContextModelSnapshot : ModelSnapshot
+    [Migration("20221009181600_RelationsRefactoring")]
+    partial class RelationsRefactoring
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -133,12 +135,7 @@ namespace PunchesManagement.DataAccess.Migrations
                     b.Property<string>("Producer")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TypesId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("TypesId");
 
                     b.ToTable("TabletPresses");
                 });
@@ -239,21 +236,10 @@ namespace PunchesManagement.DataAccess.Migrations
                     b.HasOne("PunchesManagement.DataAccess.Entities.Types", "Types")
                         .WithMany("Punches")
                         .HasForeignKey("TypesId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Manufacturer");
-
-                    b.Navigation("Types");
-                });
-
-            modelBuilder.Entity("PunchesManagement.DataAccess.Entities.TabletPress", b =>
-                {
-                    b.HasOne("PunchesManagement.DataAccess.Entities.Types", "Types")
-                        .WithMany("TabletPress")
-                        .HasForeignKey("TypesId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
 
                     b.Navigation("Types");
                 });
@@ -297,8 +283,6 @@ namespace PunchesManagement.DataAccess.Migrations
             modelBuilder.Entity("PunchesManagement.DataAccess.Entities.Types", b =>
                 {
                     b.Navigation("Punches");
-
-                    b.Navigation("TabletPress");
                 });
 
             modelBuilder.Entity("PunchesManagement.DataAccess.Entities.UserRole", b =>

@@ -6,6 +6,6 @@ public class User : EntityBase
     public string LastName { get; set; }
     public string PasswordHash { get; set; }
 
+    public UserRole UserRole { get; set; }
     public int UserRoleId { get; set; }
-    public virtual UserRole UserRole { get; set; }
 }
