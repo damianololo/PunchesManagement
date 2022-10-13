@@ -8,6 +8,8 @@ public class Punches : EntityBase
     [MaxLength(50)]
     [Required]
     public string Size { get; set; }
+    [MaxLength(50)]
+    [Required]
     public string Series { get; set; }
     [Precision(6, 2)]
     public decimal MachineHour { get; set; }

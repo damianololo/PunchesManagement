@@ -9,7 +9,7 @@ namespace PunchesManagement.ApplicationServices.API.Domain.Models
     public class Product
     {
         public string Name { get; set; }
-        public int Series { get; set; }
+        public string Series { get; set; }
         public decimal BatchSize { get; set; }
         public string Description { get; set; }
     }

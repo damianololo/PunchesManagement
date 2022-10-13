@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using PunchesManagement.ApplicationServices.API.Domain;
+using PunchesManagement.ApplicationServices.API.Domain.PunchesServices;
 
 namespace PunchesManagement.ApplicationServices.Mappings;
 

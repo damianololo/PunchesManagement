@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using PunchesManagement.ApplicationServices.API.Domain;
+using PunchesManagement.ApplicationServices.API.Domain.TabletPressServices;
 
 namespace PunchesManagement.Controllers;
 
@@ -21,6 +21,14 @@ public class TabletPressesController : ControllerBase
     {
         var response = await _mediator.Send(request);
 
+        return Ok(response);
+    }
+
+    [HttpPost]
+    [Route("")]
+    public async Task<IActionResult> AddTabletPress([FromBody] AddTabletPressRequest request)
+    {
+        var response = await _mediator.Send(request);
         return Ok(response);
     }
 }

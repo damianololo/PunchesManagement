@@ -1,8 +1,13 @@
-﻿namespace PunchesManagement.DataAccess.Entities;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace PunchesManagement.DataAccess.Entities;
 
 public class TabletPress : EntityBase
 {
+    [MaxLength(50)]
+    [Required]
     public string Name { get; set; }
+    [MaxLength(50)]
     public string Producer { get; set; }
     public int NumberOfStation { get; set; }
 

@@ -4,4 +4,6 @@ public class TabletPress
 {
     public string Name { get; set; }
     public int NumberOfStation { get; set; }
+
+    public string Types { get; set; }
 }

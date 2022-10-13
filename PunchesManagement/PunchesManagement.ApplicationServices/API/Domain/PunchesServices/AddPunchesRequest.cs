@@ -1,8 +1,6 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
-using PunchesManagement.DataAccess.Entities;
 
-namespace PunchesManagement.ApplicationServices.API.Domain;
+namespace PunchesManagement.ApplicationServices.API.Domain.PunchesServices;
 
 public class AddPunchesRequest : IRequest<AddPunchesResponse>
 {

@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using PunchesManagement.ApplicationServices.API.Domain;
+using PunchesManagement.ApplicationServices.API.Domain.ProductsServices;
+using PunchesManagement.ApplicationServices.API.Domain.PunchesServices;
 
 namespace PunchesManagement.Controllers;
 
@@ -32,4 +33,13 @@ public class ProductsController : ControllerBase
 
 		return Ok(response);
 	}
+
+    [HttpPost]
+    [Route("")]
+    public async Task<IActionResult> AddProduct([FromBody] AddProductRequest request)
+    {
+        var response = await _mediator.Send(request);
+
+        return Ok(response);
+    }
 }

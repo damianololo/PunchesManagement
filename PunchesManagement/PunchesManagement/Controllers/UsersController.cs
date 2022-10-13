@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using PunchesManagement.ApplicationServices.API.Domain;
+using PunchesManagement.ApplicationServices.API.Domain.UsersServices;
 
 namespace PunchesManagement.Controllers;
 
