@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PunchesManagement.ApplicationServices.API.Domain.ProductsServices;
-using PunchesManagement.ApplicationServices.API.Domain.PunchesServices;
 
 namespace PunchesManagement.Controllers;
 
@@ -27,12 +26,15 @@ public class ProductsController : ControllerBase
 
     [HttpGet]
     [Route("{id}")]
-	public async Task<IActionResult> GetProduct([FromQuery]GetProductRequest request, [FromRoute]int id)
+	public async Task<IActionResult> GetProductById([FromRoute]int id)
 	{
-		var response = await _mediator.Send(request);
-
-		return Ok(response);
-	}
+        var request = new GetProductByIdRequest()
+        {
+            SearchId = id
+        };
+        var response = await _mediator.Send(request);
+        return Ok(response);
+    }
 
     [HttpPost]
     [Route("")]

@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using PunchesManagement.ApplicationServices.API.Domain.ProductsServices;
 using PunchesManagement.ApplicationServices.API.Domain.UsersServices;
 
 namespace PunchesManagement.Controllers;
@@ -18,6 +19,27 @@ public class UsersController : ControllerBase
     [HttpGet]
     [Route("")]
     public async Task<IActionResult> GetAllUsers([FromQuery] GetUsersRequest request)
+    {
+        var response = await _mediator.Send(request);
+
+        return Ok(response);
+    }
+
+    [HttpGet]
+    [Route("{id}")]
+    public async Task<IActionResult> GetUserById([FromRoute]int id)
+    {
+        var request = new GetUserByIdRequest()
+        {
+            SearchId = id
+        };
+        var response = await _mediator.Send(request);
+        return Ok(response);
+    }
+
+    [HttpPost]
+    [Route("")]
+    public async Task<IActionResult> AddUser([FromBody] AddUserRequest request)
     {
         var response = await _mediator.Send(request);
 

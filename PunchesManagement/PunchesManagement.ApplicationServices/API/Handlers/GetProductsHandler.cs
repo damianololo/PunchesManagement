@@ -19,7 +19,10 @@ public class GetProductsHandler : IRequestHandler<GetProductsRequest, GetProduct
     }
     public async Task<GetProductsResponse> Handle(GetProductsRequest request, CancellationToken cancellationToken)
     {
-        var query = new GetProductsQuery();
+        var query = new GetProductsQuery()
+        {
+            SearchPhrase = request.SearchPhrase,
+        };
         var products = await _queryExecutor.Execute(query);
         var mappedProducts = _mapper.Map<List<Domain.Models.Product>>(products);
         var response = new GetProductsResponse()

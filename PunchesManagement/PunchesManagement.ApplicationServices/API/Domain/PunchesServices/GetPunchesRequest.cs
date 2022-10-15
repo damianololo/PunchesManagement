@@ -4,5 +4,5 @@ namespace PunchesManagement.ApplicationServices.API.Domain.PunchesServices;
 
 public class GetPunchesRequest : IRequest<GetPunchesResponse>
 {
-    public string SearchSize { get; set; }
+    public string ?SearchPhrase { get; set; }
 }

@@ -20,7 +20,10 @@ public class GetPunchesHandler : IRequestHandler<GetPunchesRequest, GetPunchesRe
 
     public async Task<GetPunchesResponse> Handle(GetPunchesRequest request, CancellationToken cancellationToken)
     {
-        var query = new GetPunchesQuery();
+        var query = new GetPunchesQuery()
+        {
+            SearchPhrase = request.SearchPhrase,
+        };
         var punches = await _queryExecutor.Execute(query);
         var mappedPunches = _mapper.Map<List<Domain.Models.Punches>>(punches);
         var response = new GetPunchesResponse()

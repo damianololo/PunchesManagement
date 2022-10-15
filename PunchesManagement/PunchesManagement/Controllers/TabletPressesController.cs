@@ -24,6 +24,18 @@ public class TabletPressesController : ControllerBase
         return Ok(response);
     }
 
+    [HttpGet]
+    [Route("{id}")]
+    public async Task<IActionResult> GetTabletPressById([FromRoute]int id)
+    {
+        var request = new GetTabletPressByIdRequest()
+        {
+            SearchId = id
+        };
+        var response = await _mediator.Send(request);
+        return Ok(response);
+    }
+
     [HttpPost]
     [Route("")]
     public async Task<IActionResult> AddTabletPress([FromBody] AddTabletPressRequest request)

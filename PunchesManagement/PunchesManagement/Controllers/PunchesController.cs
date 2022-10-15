@@ -24,6 +24,18 @@ public class PunchesController : ControllerBase
 		return Ok(response);
 	}
 
+	[HttpGet]
+	[Route("{id}")]
+	public async Task<IActionResult> GetPunchesById([FromRoute]int id)
+	{
+		var request = new GetPunchesByIdRequest()
+		{
+			SearchId = id
+		};
+		var response = await _mediator.Send(request);
+		return Ok(response);
+	}
+
 	[HttpPost]
 	[Route("")]
 	public async Task<IActionResult> AddPunches([FromBody] AddPunchesRequest request)
