@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using PunchesManagement.ApplicationServices.API.Domain.ProductsServices;
 using PunchesManagement.ApplicationServices.API.Domain.TabletPressServices;
 
 namespace PunchesManagement.Controllers;
@@ -40,6 +41,18 @@ public class TabletPressesController : ControllerBase
     [Route("")]
     public async Task<IActionResult> AddTabletPress([FromBody] AddTabletPressRequest request)
     {
+        var response = await _mediator.Send(request);
+        return Ok(response);
+    }
+
+    [HttpDelete]
+    [Route("{id}")]
+    public async Task<IActionResult> DeleteTabletPress([FromRoute] int id)
+    {
+        var request = new DeleteTabletPressRequest()
+        {
+            DeleteId = id
+        };
         var response = await _mediator.Send(request);
         return Ok(response);
     }

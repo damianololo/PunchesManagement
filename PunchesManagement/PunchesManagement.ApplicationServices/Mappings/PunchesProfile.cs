@@ -18,5 +18,8 @@ public class PunchesProfile : Profile
             .ForMember(x => x.Series, y => y.MapFrom(z => z.Series))
             .ForMember(x => x.ManufacturerId, y => y.MapFrom(z => z.ManufacturerId))
             .ForMember(x => x.TypesId, y => y.MapFrom(z => z.TypesId));
+
+        CreateMap<DeletePunchesRequest, DataAccess.Entities.Punches>()
+            .ForMember(x => x.Id, y => y.MapFrom(z => z.DeleteId));
     }
 }

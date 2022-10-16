@@ -2,6 +2,7 @@
 
 public class TabletPress
 {
+    public int Id { get; set; }
     public string Name { get; set; }
     public int NumberOfStation { get; set; }
 

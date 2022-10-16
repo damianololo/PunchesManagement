@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using PunchesManagement.ApplicationServices.API.Domain.ProductsServices;
 using PunchesManagement.ApplicationServices.API.Domain.PunchesServices;
 
 namespace PunchesManagement.Controllers;
@@ -44,4 +45,17 @@ public class PunchesController : ControllerBase
 
 		return Ok(response);
 	}
+
+	[HttpDelete]
+	[Route("{id}")]
+	public async Task<IActionResult> DeletePunches([FromRoute]int id)
+	{
+		var request = new DeletePunchesRequest()
+		{
+			DeleteId = id
+		};
+		var response = await _mediator.Send(request);
+		return Ok(response);
+
+    }
 }

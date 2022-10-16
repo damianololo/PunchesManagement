@@ -9,6 +9,7 @@ public class ProductsProfile : Profile
 	public ProductsProfile()
 	{
         CreateMap<DataAccess.Entities.Product, Product>()
+            .ForMember(x => x.Id, y => y.MapFrom(z => z.Id))
             .ForMember(x => x.Name, y => y.MapFrom(z => z.Name))
             .ForMember(x => x.Series, y => y.MapFrom(z => z.Series))
             .ForMember(x => x.BatchSize, y => y.MapFrom(z => z.BatchSize))
@@ -20,5 +21,8 @@ public class ProductsProfile : Profile
             .ForMember(x => x.Description, y => y.MapFrom(z => z.Description))
             .ForMember(x => x.ProductionTime, y => y.MapFrom(z => z.ProductionTime))
             .ForMember(x => x.TabletPressId, y => y.MapFrom(z => z.TabletPressId));
+
+        CreateMap<DeleteProductRequest, DataAccess.Entities.Product>()
+            .ForMember(x => x.Id, y => y.MapFrom(z => z.DeleteId));
     }
 }

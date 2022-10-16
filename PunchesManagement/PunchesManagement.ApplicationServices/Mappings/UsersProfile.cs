@@ -19,5 +19,8 @@ public class UsersProfile : Profile
             .ForMember(x => x.LastName, y => y.MapFrom(z => z.LastName))
             .ForMember(x => x.PasswordHash, y => y.MapFrom(z => z.PasswordHash))
             .ForMember(x => x.UserRoleId, y => y.MapFrom(z => z.UserRoleId));
+
+        CreateMap<DeleteUserRequest, DataAccess.Entities.User>()
+            .ForMember(x => x.Id, y => y.MapFrom(z => z.DeleteId));
     }
 }

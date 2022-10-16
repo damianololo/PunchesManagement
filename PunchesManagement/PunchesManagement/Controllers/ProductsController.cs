@@ -44,4 +44,16 @@ public class ProductsController : ControllerBase
 
         return Ok(response);
     }
+
+    [HttpDelete]
+    [Route("{id}")]
+    public async Task<IActionResult> DeleteProduct([FromRoute]int id)
+    {
+        var request = new DeleteProductRequest()
+        {
+            DeleteId = id
+        };
+        var response = await _mediator.Send(request);
+        return Ok(response);
+    }
 }
