@@ -22,5 +22,12 @@ public class UsersProfile : Profile
 
         CreateMap<DeleteUserRequest, DataAccess.Entities.User>()
             .ForMember(x => x.Id, y => y.MapFrom(z => z.DeleteId));
+
+        CreateMap<UpdateUserRequest, DataAccess.Entities.User>()
+            .ForMember(x => x.Id, y => y.MapFrom(z => z.UpdateId))
+            .ForMember(x => x.FirstName, y => y.MapFrom(z => z.FirstName))
+            .ForMember(x => x.LastName, y => y.MapFrom(z => z.LastName))
+            .ForMember(x => x.PasswordHash, y => y.MapFrom(z => z.PasswordHash))
+            .ForMember(x => x.UserRoleId, y => y.MapFrom(z => z.UserRoleId));
     }
 }

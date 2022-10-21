@@ -8,7 +8,7 @@ public class GetProductByIdQuery : QueryBase<Product>
     public int SearchId { get; set; }
     public override async Task<Product> Execute(PunchesManagementContext context)
     {
-        var product = await context.Products.FirstOrDefaultAsync(x => x.Id == SearchId);
+        var product = await context.Products.Include(r => r.TabletPress).FirstOrDefaultAsync(x => x.Id == SearchId);
         return product;
     }
 }

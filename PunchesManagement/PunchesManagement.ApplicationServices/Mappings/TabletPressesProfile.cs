@@ -22,5 +22,12 @@ public class TabletPressesProfile : Profile
 
         CreateMap<DeleteTabletPressRequest, DataAccess.Entities.TabletPress>()
            .ForMember(x => x.Id, y => y.MapFrom(z => z.DeleteId));
+
+        CreateMap<UpdateTabletPressRequest, DataAccess.Entities.TabletPress>()
+           .ForMember(x => x.Id, y => y.MapFrom(z => z.UpdateId))
+           .ForMember(x => x.Name, y => y.MapFrom(z => z.Name))
+           .ForMember(x => x.Producer, y => y.MapFrom(z => z.Producer))
+           .ForMember(x => x.NumberOfStation, y => y.MapFrom(z => z.NumberOfStation))
+           .ForMember(x => x.TypesId, y => y.MapFrom(z => z.TypesId));
     }
 }

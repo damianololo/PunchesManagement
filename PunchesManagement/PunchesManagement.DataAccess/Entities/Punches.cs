@@ -5,10 +5,10 @@ namespace PunchesManagement.DataAccess.Entities;
 
 public class Punches : EntityBase
 {
-    [MaxLength(50)]
+    [MaxLength(10)]
     [Required]
     public string Size { get; set; }
-    [MaxLength(50)]
+    [MaxLength(20)]
     [Required]
     public string Series { get; set; }
     [Precision(6, 2)]

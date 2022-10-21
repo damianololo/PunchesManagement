@@ -10,7 +10,7 @@ public class GetProductsQuery : QueryBase<List<Product>>
     public override Task<List<Product>> Execute(PunchesManagementContext context)
     {
         return context.Products
-        //    .Include(r => r.TabletPress)
+            .Include(r => r.TabletPress)
             .Where(r => SearchPhrase == null
             || (r.Name.ToLower()
             .Contains(SearchPhrase.ToLower())))

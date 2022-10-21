@@ -57,4 +57,13 @@ public class UsersController : ControllerBase
         var response = await _mediator.Send(request);
         return Ok(response);
     }
+
+    [HttpPut]
+    [Route("{id}")]
+    public async Task<IActionResult> UpdateUserById([FromRoute] int id, [FromBody] UpdateUserRequest request)
+    {
+        request.UpdateId = id;
+        var response = await _mediator.Send(request);
+        return Ok(response);
+    }
 }

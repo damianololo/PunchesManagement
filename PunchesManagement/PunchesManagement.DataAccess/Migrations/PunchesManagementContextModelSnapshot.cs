@@ -17,7 +17,7 @@ namespace PunchesManagement.DataAccess.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.9")
+                .HasAnnotation("ProductVersion", "6.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -53,8 +53,8 @@ namespace PunchesManagement.DataAccess.Migrations
                         .HasColumnType("decimal(6,2)");
 
                     b.Property<string>("Description")
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
+                        .HasMaxLength(1500)
+                        .HasColumnType("nvarchar(1500)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -64,18 +64,22 @@ namespace PunchesManagement.DataAccess.Migrations
                     b.Property<int>("Output")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("ProductionTime")
+                    b.Property<DateTime>("ProductionTimeStart")
                         .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ProductionTimeStop")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("RealWorkingTime")
+                        .HasPrecision(6, 2)
+                        .HasColumnType("decimal(6,2)");
 
                     b.Property<string>("Series")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<int>("TabletPressId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WorkingTime")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -105,13 +109,13 @@ namespace PunchesManagement.DataAccess.Migrations
 
                     b.Property<string>("Series")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("Size")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<int>("TypesId")
                         .HasColumnType("int");
@@ -135,15 +139,15 @@ namespace PunchesManagement.DataAccess.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<int>("NumberOfStation")
                         .HasColumnType("int");
 
                     b.Property<string>("Producer")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<int>("TypesId")
                         .HasColumnType("int");

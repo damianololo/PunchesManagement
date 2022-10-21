@@ -4,10 +4,10 @@ namespace PunchesManagement.DataAccess.Entities;
 
 public class TabletPress : EntityBase
 {
-    [MaxLength(50)]
+    [MaxLength(20)]
     [Required]
     public string Name { get; set; }
-    [MaxLength(50)]
+    [MaxLength(20)]
     public string Producer { get; set; }
     public int NumberOfStation { get; set; }
 

@@ -56,4 +56,13 @@ public class ProductsController : ControllerBase
         var response = await _mediator.Send(request);
         return Ok(response);
     }
+
+    [HttpPut]
+    [Route("{id}")]
+    public async Task<IActionResult> UpdateProductById([FromRoute]int id, [FromBody] UpdateProductRequest request)
+    {
+        request.UpdateId = id;
+        var response = await _mediator.Send(request);
+        return Ok(response);
+    }
 }

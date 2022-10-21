@@ -10,6 +10,7 @@ public class GetPunchesQuery : QueryBase<List<Punches>>
     {
         return context.Punches
             .Include(r => r.Types)
+            .Include(r => r.Manufacturer)
             .Where(r => SearchPhrase == null
             || (r.Size.ToLower()
             .Contains(SearchPhrase.ToLower())))

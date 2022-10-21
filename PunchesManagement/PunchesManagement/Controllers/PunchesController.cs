@@ -56,6 +56,14 @@ public class PunchesController : ControllerBase
 		};
 		var response = await _mediator.Send(request);
 		return Ok(response);
+    }
 
+    [HttpPut]
+    [Route("{id}")]
+    public async Task<IActionResult> UpdatePunchesById([FromRoute] int id, [FromBody] UpdatePunchesRequest request)
+    {
+        request.UpdateId = id;
+        var response = await _mediator.Send(request);
+        return Ok(response);
     }
 }

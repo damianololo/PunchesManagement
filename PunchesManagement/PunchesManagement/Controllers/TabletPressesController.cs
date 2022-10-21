@@ -56,4 +56,13 @@ public class TabletPressesController : ControllerBase
         var response = await _mediator.Send(request);
         return Ok(response);
     }
+
+    [HttpPut]
+    [Route("{id}")]
+    public async Task<IActionResult> UpdateTabletPressById([FromRoute] int id, [FromBody] UpdateTabletPressRequest request)
+    {
+        request.UpdateId = id;
+        var response = await _mediator.Send(request);
+        return Ok(response);
+    }
 }
