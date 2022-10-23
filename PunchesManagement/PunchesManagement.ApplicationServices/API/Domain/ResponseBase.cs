@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace PunchesManagement.ApplicationServices.API.Domain;
 
-namespace PunchesManagement.ApplicationServices.API.Domain
+public class ResponseBase<T> : ErrorResponseBase
 {
-    public class ResponseBase<T>
-    {
-        public T Data { get; set; }
-    }
+    public T Data { get; set; }
 }

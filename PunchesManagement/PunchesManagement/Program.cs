@@ -1,8 +1,9 @@
 using FluentValidation.AspNetCore;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PunchesManagement.ApplicationServices.API.Domain;
-using PunchesManagement.ApplicationServices.API.Validators;
+using PunchesManagement.ApplicationServices.API.Validators.Users;
 using PunchesManagement.ApplicationServices.Mappings;
 using PunchesManagement.DataAccess;
 using PunchesManagement.DataAccess.CQRS;
@@ -22,8 +23,14 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddMediatR(typeof(ResponseBase<>));
 builder.Services.AddAutoMapper(typeof(UsersProfile).Assembly);
+
 builder.Services.AddMvcCore()
     .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AddUserRequestValidator>());
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    options.SuppressModelStateInvalidFilter = true;
+});
+
 builder.Services.AddScoped<DataSeeder>();
 
 var app = builder.Build();

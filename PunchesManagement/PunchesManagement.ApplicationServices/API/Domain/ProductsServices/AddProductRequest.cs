@@ -9,7 +9,7 @@ public class AddProductRequest : IRequest<AddProductResponse>
     [MaxLength(50)]
     [Required]
     public string Name { get; set; }
-    [MaxLength(50)]
+    [MaxLength(20)]
     [Required]
     public string Series { get; set; }
     [MaxLength(1500)]

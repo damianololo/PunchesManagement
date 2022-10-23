@@ -2,8 +2,7 @@
 using MediatR;
 using PunchesManagement.ApplicationServices.API.Domain.ProductsServices;
 using PunchesManagement.DataAccess.CQRS;
-using PunchesManagement.DataAccess.CQRS.Commands;
-using PunchesManagement.DataAccess.CQRS.Queries;
+using PunchesManagement.DataAccess.CQRS.Commands.ProductsCommand;
 
 namespace PunchesManagement.ApplicationServices.API.Handlers.ProductsHandlers;
 

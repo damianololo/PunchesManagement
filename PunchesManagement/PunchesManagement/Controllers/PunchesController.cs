@@ -1,69 +1,57 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using PunchesManagement.ApplicationServices.API.Domain.ProductsServices;
 using PunchesManagement.ApplicationServices.API.Domain.PunchesServices;
 
 namespace PunchesManagement.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class PunchesController : ControllerBase
+public class PunchesController : ApiControllerBase
 {
-	private readonly IMediator _mediator;
-
-	public PunchesController(IMediator mediator)
+	public PunchesController(IMediator mediator) :base(mediator)
 	{
-		_mediator = mediator;
 	}
 
 	[HttpGet]
 	[Route ("")]
-	public async Task<IActionResult> GetAllPunches([FromQuery]GetPunchesRequest request)
+	public Task<IActionResult> GetAllPunches([FromQuery]GetPunchesRequest request)
 	{
-		var response = await _mediator.Send(request);
-
-		return Ok(response);
-	}
+        return this.HandleRequest<GetPunchesRequest, GetPunchesResponse>(request);
+    }
 
 	[HttpGet]
 	[Route("{id}")]
-	public async Task<IActionResult> GetPunchesById([FromRoute]int id)
+	public Task<IActionResult> GetPunchesById([FromRoute]int id)
 	{
 		var request = new GetPunchesByIdRequest()
 		{
 			SearchId = id
 		};
-		var response = await _mediator.Send(request);
-		return Ok(response);
-	}
+        return this.HandleRequest<GetPunchesByIdRequest, GetPunchesByIdResponse>(request);
+    }
 
 	[HttpPost]
 	[Route("")]
-	public async Task<IActionResult> AddPunches([FromBody] AddPunchesRequest request)
+	public Task<IActionResult> AddPunches([FromBody] AddPunchesRequest request)
 	{
-		var response = await _mediator.Send(request);
-
-		return Ok(response);
+        return this.HandleRequest<AddPunchesRequest, AddPunchesResponse>(request);
+    }
+    [HttpPut]
+    [Route("{id}")]
+    public Task<IActionResult> UpdatePunchesById([FromRoute] int id, [FromBody] UpdatePunchesRequest request)
+    {
+        request.UpdateId = id;
+        return this.HandleRequest<UpdatePunchesRequest, UpdatePunchesResponse>(request);
 	}
 
 	[HttpDelete]
 	[Route("{id}")]
-	public async Task<IActionResult> DeletePunches([FromRoute]int id)
+	public Task<IActionResult> DeletePunches([FromRoute]int id)
 	{
 		var request = new DeletePunchesRequest()
 		{
 			DeleteId = id
 		};
-		var response = await _mediator.Send(request);
-		return Ok(response);
-    }
-
-    [HttpPut]
-    [Route("{id}")]
-    public async Task<IActionResult> UpdatePunchesById([FromRoute] int id, [FromBody] UpdatePunchesRequest request)
-    {
-        request.UpdateId = id;
-        var response = await _mediator.Send(request);
-        return Ok(response);
+        return this.HandleRequest<DeletePunchesRequest, DeletePunchesResponse>(request);
     }
 }

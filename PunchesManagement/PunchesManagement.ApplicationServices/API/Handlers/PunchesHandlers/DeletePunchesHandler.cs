@@ -2,7 +2,7 @@
 using MediatR;
 using PunchesManagement.ApplicationServices.API.Domain.PunchesServices;
 using PunchesManagement.DataAccess.CQRS;
-using PunchesManagement.DataAccess.CQRS.Commands;
+using PunchesManagement.DataAccess.CQRS.Commands.PunchesCommand;
 
 namespace PunchesManagement.ApplicationServices.API.Handlers.PunchesHandlers;
 

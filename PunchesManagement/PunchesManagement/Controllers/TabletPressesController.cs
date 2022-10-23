@@ -1,68 +1,57 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using PunchesManagement.ApplicationServices.API.Domain.ProductsServices;
 using PunchesManagement.ApplicationServices.API.Domain.TabletPressServices;
 
 namespace PunchesManagement.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class TabletPressesController : ControllerBase
+public class TabletPressesController : ApiControllerBase
 {
-	private readonly IMediator _mediator;
-
-	public TabletPressesController(IMediator mediator)
+	public TabletPressesController(IMediator mediator) : base(mediator)
 	{
-		_mediator = mediator;
 	}
 
 	[HttpGet]
     [Route ("")]
-    public async Task<IActionResult> GetAllTabletPresses([FromQuery] GetTabletPressesRequest request)
+    public Task<IActionResult> GetAllTabletPresses([FromQuery] GetTabletPressesRequest request)
     {
-        var response = await _mediator.Send(request);
-
-        return Ok(response);
+        return this.HandleRequest<GetTabletPressesRequest, GetTabletPressesResponse>(request);
     }
 
     [HttpGet]
     [Route("{id}")]
-    public async Task<IActionResult> GetTabletPressById([FromRoute]int id)
+    public Task<IActionResult> GetTabletPressById([FromRoute]int id)
     {
         var request = new GetTabletPressByIdRequest()
         {
             SearchId = id
         };
-        var response = await _mediator.Send(request);
-        return Ok(response);
+        return this.HandleRequest<GetTabletPressByIdRequest, GetTabletPressByIdResponse>(request);
     }
 
     [HttpPost]
     [Route("")]
-    public async Task<IActionResult> AddTabletPress([FromBody] AddTabletPressRequest request)
+    public Task<IActionResult> AddTabletPress([FromBody] AddTabletPressRequest request)
     {
-        var response = await _mediator.Send(request);
-        return Ok(response);
+        return this.HandleRequest<AddTabletPressRequest, AddTabletPressResponse>(request);
+    }
+    [HttpPut]
+    [Route("{id}")]
+    public Task<IActionResult> UpdateTabletPressById([FromRoute] int id, [FromBody] UpdateTabletPressRequest request)
+    {
+        request.UpdateId = id;
+        return this.HandleRequest<UpdateTabletPressRequest, UpdateTabletPressResponse>(request);
     }
 
     [HttpDelete]
     [Route("{id}")]
-    public async Task<IActionResult> DeleteTabletPress([FromRoute] int id)
+    public Task<IActionResult> DeleteTabletPress([FromRoute] int id)
     {
         var request = new DeleteTabletPressRequest()
         {
             DeleteId = id
         };
-        var response = await _mediator.Send(request);
-        return Ok(response);
-    }
-
-    [HttpPut]
-    [Route("{id}")]
-    public async Task<IActionResult> UpdateTabletPressById([FromRoute] int id, [FromBody] UpdateTabletPressRequest request)
-    {
-        request.UpdateId = id;
-        var response = await _mediator.Send(request);
-        return Ok(response);
+        return this.HandleRequest<DeleteTabletPressRequest, DeleteTabletPressResponse>(request);
     }
 }

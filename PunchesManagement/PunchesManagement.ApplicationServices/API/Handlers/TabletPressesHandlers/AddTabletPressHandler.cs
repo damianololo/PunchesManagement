@@ -2,7 +2,7 @@
 using MediatR;
 using PunchesManagement.ApplicationServices.API.Domain.TabletPressServices;
 using PunchesManagement.DataAccess.CQRS;
-using PunchesManagement.DataAccess.CQRS.Commands;
+using PunchesManagement.DataAccess.CQRS.Commands.TabletPressCommand;
 
 namespace PunchesManagement.ApplicationServices.API.Handlers.TabletPressesHandlers;
 
