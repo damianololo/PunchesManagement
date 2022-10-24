@@ -2,6 +2,7 @@
 using MediatR;
 using PunchesManagement.ApplicationServices.API.Domain;
 using PunchesManagement.ApplicationServices.API.Domain.ProductsServices;
+using PunchesManagement.ApplicationServices.API.ErrorHandling;
 using PunchesManagement.DataAccess.CQRS;
 using PunchesManagement.DataAccess.CQRS.Queries;
 
@@ -25,6 +26,15 @@ public class GetProductByIdHandler : IRequestHandler<GetProductByIdRequest, GetP
             SearchId = request.SearchId,
         };
         var product = await _queryExecutor.Execute(query);
+
+        if (product is null)
+        {
+            return new GetProductByIdResponse()
+            {
+                Error = new ErrorModel(ErrorType.NotFound)
+            };
+        }
+
         var mappedProduct = _mapper.Map<Domain.Models.Product>(product);
         var response = new GetProductByIdResponse()
         {

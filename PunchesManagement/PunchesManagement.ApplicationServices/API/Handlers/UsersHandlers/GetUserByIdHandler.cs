@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
+using PunchesManagement.ApplicationServices.API.Domain;
 using PunchesManagement.ApplicationServices.API.Domain.UsersServices;
+using PunchesManagement.ApplicationServices.API.ErrorHandling;
 using PunchesManagement.DataAccess.CQRS;
 using PunchesManagement.DataAccess.CQRS.Queries;
 
@@ -24,6 +26,15 @@ public class GetUserByIdHandler : IRequestHandler<GetUserByIdRequest, GetUserByI
             SearchId = request.SearchId
         };
         var user = await _queryExecutor.Execute(query);
+
+        if (user is null)
+        {
+            return new GetUserByIdResponse()
+            {
+                Error = new ErrorModel(ErrorType.NotFound)
+            };
+        }
+
         var mappedUser = _mapper.Map<Domain.Models.User>(user);
         var response = new GetUserByIdResponse()
         {

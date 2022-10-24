@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
 using MediatR;
+using PunchesManagement.ApplicationServices.API.Domain;
 using PunchesManagement.ApplicationServices.API.Domain.PunchesServices;
+using PunchesManagement.ApplicationServices.API.ErrorHandling;
 using PunchesManagement.DataAccess.CQRS;
 using PunchesManagement.DataAccess.CQRS.Commands.PunchesCommand;
+using PunchesManagement.DataAccess.CQRS.Queries;
 
 namespace PunchesManagement.ApplicationServices.API.Handlers.PunchesHandlers;
 
@@ -24,6 +27,20 @@ public class UpdatePunchesHandler : IRequestHandler<UpdatePunchesRequest, Update
 
     public async Task<UpdatePunchesResponse> Handle(UpdatePunchesRequest request, CancellationToken cancellationToken)
     {
+        var query = new GetPunchesByIdQuery()
+        {
+            SearchId = request.UpdateId
+        };
+        var punches = await _queryExecutor.Execute(query);
+
+        if (punches == null)
+        {
+            return new UpdatePunchesResponse()
+            {
+                Error = new ErrorModel(ErrorType.NotFound)
+            };
+        }
+
         var mappedPunches = _mapper.Map<DataAccess.Entities.Punches>(request);
         var command = new UpdatePunchesCommand()
         {

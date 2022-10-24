@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
+using PunchesManagement.ApplicationServices.API.Domain;
 using PunchesManagement.ApplicationServices.API.Domain.PunchesServices;
+using PunchesManagement.ApplicationServices.API.ErrorHandling;
 using PunchesManagement.DataAccess.CQRS;
 using PunchesManagement.DataAccess.CQRS.Queries;
 
@@ -24,6 +26,15 @@ public class GetPunchesByIdHandler : IRequestHandler<GetPunchesByIdRequest, GetP
             SearchId = request.SearchId
         };
         var punches = await _queryExecutor.Execute(query);
+
+        if (punches is null)
+        {
+            return new GetPunchesByIdResponse()
+            {
+                Error = new ErrorModel(ErrorType.NotFound)
+            };
+        }
+
         var mappedPunches = _mapper.Map<Domain.Models.Punches>(punches);
         var response = new GetPunchesByIdResponse()
         { 

@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
 using MediatR;
+using PunchesManagement.ApplicationServices.API.Domain;
 using PunchesManagement.ApplicationServices.API.Domain.ProductsServices;
 using PunchesManagement.ApplicationServices.API.Domain.UsersServices;
+using PunchesManagement.ApplicationServices.API.ErrorHandling;
 using PunchesManagement.DataAccess.CQRS;
 using PunchesManagement.DataAccess.CQRS.Commands;
+using PunchesManagement.DataAccess.CQRS.Queries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +33,20 @@ namespace PunchesManagement.ApplicationServices.API.Handlers.UsersHandlers
 
         public async Task<UpdateUserResponse> Handle(UpdateUserRequest request, CancellationToken cancellationToken)
         {
+            var query = new GetUserByIdQuery()
+            {
+                SearchId = request.UpdateId
+            };
+            var user = await _queryExecutor.Execute(query);
+
+            if (user is null)
+            {
+                return new UpdateUserResponse()
+                {
+                    Error = new ErrorModel(ErrorType.NotFound)
+                };
+            }
+
             var mappedUser = _mapper.Map<DataAccess.Entities.User>(request);
             var command = new UpdateUserCommand()
             {

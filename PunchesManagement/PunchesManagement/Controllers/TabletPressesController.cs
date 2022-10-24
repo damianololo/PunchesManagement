@@ -27,7 +27,7 @@ public class TabletPressesController : ApiControllerBase
         {
             SearchId = id
         };
-        return this.HandleRequest<GetTabletPressByIdRequest, GetTabletPressByIdResponse>(request);
+        return this.HandleRequest<GetTabletPressByIdRequest, GetTabletPressResponse>(request);
     }
 
     [HttpPost]

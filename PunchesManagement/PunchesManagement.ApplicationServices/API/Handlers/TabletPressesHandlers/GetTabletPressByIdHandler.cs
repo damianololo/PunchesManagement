@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
+using PunchesManagement.ApplicationServices.API.Domain;
 using PunchesManagement.ApplicationServices.API.Domain.TabletPressServices;
+using PunchesManagement.ApplicationServices.API.ErrorHandling;
 using PunchesManagement.DataAccess.CQRS;
 using PunchesManagement.DataAccess.CQRS.Queries;
 
@@ -24,6 +26,15 @@ public class GetTabletPressByIdHandler : IRequestHandler<GetTabletPressByIdReque
             SearchId = request.SearchId,
         };
         var tabletPress = await _queryExecutor.Execute(query);
+
+        if (tabletPress is null)
+        {
+            return new GetTabletPressByIdResponse()
+            {
+                Error = new ErrorModel(ErrorType.NotFound)
+            };
+        }
+
         var mappedTabletPress = _mapper.Map<Domain.Models.TabletPress>(tabletPress);
         var response = new GetTabletPressByIdResponse()
         {
