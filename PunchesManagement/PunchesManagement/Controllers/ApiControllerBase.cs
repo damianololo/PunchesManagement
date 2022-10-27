@@ -9,10 +9,12 @@ namespace PunchesManagement.Controllers;
 public class ApiControllerBase : ControllerBase
 {
 	protected readonly IMediator _mediator;
+	private readonly ILogger<ApiControllerBase> _logger;
 
-	protected ApiControllerBase(IMediator mediator)
+	protected ApiControllerBase(IMediator mediator, ILogger<ApiControllerBase> logger)
 	{
 		_mediator = mediator;
+		_logger = logger;
 	}
 
 	protected async Task<IActionResult> HandleRequest<TRequest, TResponse>(TRequest request)
@@ -33,7 +35,7 @@ public class ApiControllerBase : ControllerBase
 		var response = await _mediator.Send(request);
 		if (response.Error != null)
 		{
-			return this.ErrorResponse(response.Error);
+            return this.ErrorResponse(response.Error);
 		}
 
 		return this.Ok(response);
@@ -41,13 +43,15 @@ public class ApiControllerBase : ControllerBase
 
 	private IActionResult ErrorResponse(ErrorModel errorModel)
 	{
-		var httpCode = GetHttpStatusCode(errorModel.Error);
+
+        _logger.LogError($"We have error: {errorModel.Error}!");
+        var httpCode = GetHttpStatusCode(errorModel.Error);
 		return StatusCode((int)httpCode, errorModel);
 	}
 
 	private static HttpStatusCode GetHttpStatusCode(string errorType)
 	{
-		switch (errorType)
+        switch (errorType)
 		{
 			case ErrorType.NotFound:
 				return HttpStatusCode.NotFound;

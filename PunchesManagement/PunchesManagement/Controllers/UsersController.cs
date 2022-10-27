@@ -9,8 +9,12 @@ namespace PunchesManagement.Controllers;
 [Route("[controller]")]
 public class UsersController : ApiControllerBase
 {
-    public UsersController(IMediator mediator) : base(mediator)
-	{
+    private readonly ILogger<UsersController> _logger;
+
+    public UsersController(IMediator mediator, ILogger<UsersController> logger) 
+        : base(mediator, logger)
+    {
+        _logger = logger;
     }
 
     [HttpGet]
@@ -49,6 +53,7 @@ public class UsersController : ApiControllerBase
     [Route("{id}")]
     public Task<IActionResult> DeleteUser([FromRoute] int id)
     {
+        _logger.LogWarning($"User with id: {id} DELETE action invoked.");
         var request = new DeleteUserRequest()
         {
             DeleteId = id

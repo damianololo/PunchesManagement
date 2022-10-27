@@ -8,11 +8,15 @@ namespace PunchesManagement.Controllers;
 [Route("[controller]")]
 public class PunchesController : ApiControllerBase
 {
-	public PunchesController(IMediator mediator) :base(mediator)
-	{
+	private readonly ILogger<PunchesController> _logger;
+
+	public PunchesController(IMediator mediator, ILogger<PunchesController> logger) 
+		: base(mediator, logger)
+    {
+		_logger = logger;
 	}
 
-	[HttpGet]
+    [HttpGet]
 	[Route ("")]
 	public Task<IActionResult> GetAllPunches([FromQuery]GetPunchesRequest request)
 	{
@@ -48,7 +52,8 @@ public class PunchesController : ApiControllerBase
 	[Route("{id}")]
 	public Task<IActionResult> DeletePunches([FromRoute]int id)
 	{
-		var request = new DeletePunchesRequest()
+        _logger.LogWarning($"Punches with id: {id} DELETE action invoked.");
+        var request = new DeletePunchesRequest()
 		{
 			DeleteId = id
 		};

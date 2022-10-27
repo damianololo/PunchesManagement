@@ -2,6 +2,7 @@ using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NLog.Web;
 using PunchesManagement.ApplicationServices.API.Domain;
 using PunchesManagement.ApplicationServices.API.Validators.Users;
 using PunchesManagement.ApplicationServices.Mappings;
@@ -9,6 +10,11 @@ using PunchesManagement.DataAccess;
 using PunchesManagement.DataAccess.CQRS;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//NLog config
+builder.Logging.ClearProviders();
+builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
+builder.Host.UseNLog();
 
 // Add services to the container.
 builder.Services.AddTransient<IQueryExecutor, QueryExecutor>();
@@ -42,11 +48,14 @@ seeder.Seed();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    //app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
+
+//app.UseRouting();
 
 app.UseAuthorization();
 

@@ -8,11 +8,15 @@ namespace PunchesManagement.Controllers;
 [Route("[controller]")]
 public class TabletPressesController : ApiControllerBase
 {
-	public TabletPressesController(IMediator mediator) : base(mediator)
-	{
-	}
+    private readonly ILogger<TabletPressesController> _logger;
 
-	[HttpGet]
+    public TabletPressesController(IMediator mediator, ILogger<TabletPressesController> logger) 
+        : base(mediator, logger)
+    {
+        _logger = logger;
+    }
+
+    [HttpGet]
     [Route ("")]
     public Task<IActionResult> GetAllTabletPresses([FromQuery] GetTabletPressesRequest request)
     {
@@ -27,7 +31,7 @@ public class TabletPressesController : ApiControllerBase
         {
             SearchId = id
         };
-        return this.HandleRequest<GetTabletPressByIdRequest, GetTabletPressResponse>(request);
+        return this.HandleRequest<GetTabletPressByIdRequest, GetTabletPressByIdResponse>(request);
     }
 
     [HttpPost]
@@ -48,6 +52,7 @@ public class TabletPressesController : ApiControllerBase
     [Route("{id}")]
     public Task<IActionResult> DeleteTabletPress([FromRoute] int id)
     {
+        _logger.LogWarning($"Tablet Press with id: {id} DELETE action invoked.");
         var request = new DeleteTabletPressRequest()
         {
             DeleteId = id

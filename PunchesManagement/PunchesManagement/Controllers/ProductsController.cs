@@ -8,9 +8,13 @@ namespace PunchesManagement.Controllers;
 [Route("[controller]")]
 public class ProductsController : ApiControllerBase
 {
-	public ProductsController(IMediator mediator) : base(mediator)
+    private readonly ILogger<ProductsController> _logger;
+
+    public ProductsController(IMediator mediator, ILogger<ProductsController> logger) 
+        : base(mediator, logger)
 	{
-	}
+        _logger = logger;
+    }
 
 	[HttpGet]
     [Route("")]
@@ -48,6 +52,7 @@ public class ProductsController : ApiControllerBase
     [Route("{id}")]
     public Task<IActionResult> DeleteProduct([FromRoute]int id)
     {
+        _logger.LogWarning($"Product with id: {id} DELETE action invoked.");
         var request = new DeleteProductRequest()
         {
             DeleteId = id
