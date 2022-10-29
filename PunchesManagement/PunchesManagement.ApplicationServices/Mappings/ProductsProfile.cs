@@ -22,7 +22,7 @@ public class ProductsProfile : Profile
             .ForMember(x => x.Series, y => y.MapFrom(z => z.Series))
             .ForMember(x => x.BatchSize, y => y.MapFrom(z => z.BatchSize))
             .ForMember(x => x.Description, y => y.MapFrom(z => z.Description))
-            .ForMember(x => x.ProductionTimeStart, y => y.MapFrom(z => z.ProductionTimeStart))
+            //.ForMember(x => x.ProductionTimeStart, y => y.MapFrom(z => z.ProductionTimeStart))
             .ForMember(x => x.TabletPressId, y => y.MapFrom(z => z.TabletPressId));
 
         CreateMap<DeleteProductRequest, DataAccess.Entities.Product>()

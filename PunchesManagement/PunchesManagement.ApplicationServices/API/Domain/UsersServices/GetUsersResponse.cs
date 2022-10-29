@@ -1,6 +1,8 @@
-﻿namespace PunchesManagement.ApplicationServices.API.Domain.UsersServices;
+﻿using PunchesManagement.ApplicationServices.API.Domain.Models;
 
-public class GetUsersResponse : ResponseBase<List<Models.User>>
+namespace PunchesManagement.ApplicationServices.API.Domain.UsersServices;
+
+public class GetUsersResponse : ResponseBase<PagedResult<User>>
 {
 
 }

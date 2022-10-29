@@ -11,6 +11,7 @@ public class Punches
     [MaxLength(20)]
     [Required]
     public string Series { get; set; }
+    public bool InInspection { get; set; }
     public string Types { get; set; }
     public string Manufacturer { get; set; }
 }

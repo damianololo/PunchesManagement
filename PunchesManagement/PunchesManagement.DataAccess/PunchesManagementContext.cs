@@ -37,7 +37,8 @@ public class PunchesManagementContext : DbContext
         {
             eb.HasMany(w => w.Products)
             .WithOne(c => c.TabletPress)
-            .HasForeignKey(k => k.TabletPressId);
+            .HasForeignKey(k => k.TabletPressId)
+            .OnDelete(DeleteBehavior.NoAction);
 
             eb.HasMany(w => w.Punches)
             .WithMany(c => c.TabletPress);

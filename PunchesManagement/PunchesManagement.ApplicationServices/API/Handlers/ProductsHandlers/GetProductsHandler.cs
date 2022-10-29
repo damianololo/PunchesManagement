@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using PunchesManagement.ApplicationServices.API.Domain;
+using PunchesManagement.ApplicationServices.API.Domain.Models;
 using PunchesManagement.ApplicationServices.API.Domain.ProductsServices;
 using PunchesManagement.ApplicationServices.API.ErrorHandling;
 using PunchesManagement.DataAccess.CQRS;
@@ -18,12 +19,16 @@ public class GetProductsHandler : IRequestHandler<GetProductsRequest, GetProduct
         _mapper = mapper;
         _queryExecutor = queryExecutor;
     }
+
     public async Task<GetProductsResponse> Handle(GetProductsRequest request, CancellationToken cancellationToken)
     {
         var query = new GetProductsQuery()
         {
             SearchPhrase = request.SearchPhrase,
+            PageNumber = request.PageNumber,
+            PageSize = request.PageSize
         };
+
         var products = await _queryExecutor.Execute(query);
 
         if (products is null)
@@ -35,10 +40,14 @@ public class GetProductsHandler : IRequestHandler<GetProductsRequest, GetProduct
         }
 
         var mappedProducts = _mapper.Map<List<Domain.Models.Product>>(products);
+        var totalItemsCount = query.TotalItemsCount;
+        var result = new PagedResult<Product>(mappedProducts, totalItemsCount, request.PageSize, request.PageNumber);
+
         var response = new GetProductsResponse()
         {
-            Data = mappedProducts
+            Data = result
         };
+
         return response;
     }
 }

@@ -40,6 +40,7 @@ public class ProductsController : ApiControllerBase
     {
         return this.HandleRequest<AddProductRequest, AddProductResponse>(request);
     }
+
     [HttpPut]
     [Route("{id}")]
     public Task<IActionResult> UpdateProductById([FromRoute]int id, [FromBody] UpdateProductRequest request)

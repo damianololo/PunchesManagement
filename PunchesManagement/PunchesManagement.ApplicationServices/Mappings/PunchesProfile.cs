@@ -11,6 +11,7 @@ public class PunchesProfile : Profile
             .ForMember(x => x.Id, y => y.MapFrom(z => z.Id))
             .ForMember(x => x.Size, y => y.MapFrom(z => z.Size))
             .ForMember(x => x.Series, y => y.MapFrom(z => z.Series))
+            .ForMember(x => x.InInspection, y => y.MapFrom(z => z.InInspection))
             .ForMember(x => x.Types, y => y.MapFrom(z => z.Types.Name))
             .ForMember(x => x.Manufacturer, y => y.MapFrom(z => z.Manufacturer.Name));
 

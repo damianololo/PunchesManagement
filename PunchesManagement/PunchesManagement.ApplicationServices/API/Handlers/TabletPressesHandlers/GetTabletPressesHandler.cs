@@ -21,7 +21,10 @@ public class GetTabletPressesHandler : IRequestHandler<GetTabletPressesRequest, 
 
     public async Task<GetTabletPressesResponse> Handle(GetTabletPressesRequest request, CancellationToken cancellationToken)
     {
-        var query = new GetTabletPressesQuery();
+        var query = new GetTabletPressesQuery()
+        {
+            SearchPhrase = request.SearchPhrase,
+        };
         var tabletPresses = await _queryExecutor.Execute(query);
 
         if (tabletPresses is null)

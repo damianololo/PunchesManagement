@@ -2,7 +2,7 @@
 
 namespace PunchesManagement.ApplicationServices.API.Domain.PunchesServices;
 
-public class GetPunchesResponse : ResponseBase<List<Punches>>
+public class GetPunchesResponse : ResponseBase<PagedResult<Punches>>
 {
 
 }

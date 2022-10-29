@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using PunchesManagement.ApplicationServices.API.Domain;
+using PunchesManagement.ApplicationServices.API.Domain.Models;
 using PunchesManagement.ApplicationServices.API.Domain.UsersServices;
 using PunchesManagement.ApplicationServices.API.ErrorHandling;
 using PunchesManagement.DataAccess.CQRS;
@@ -21,7 +22,11 @@ public class GetUsersHandler : IRequestHandler<GetUsersRequest, GetUsersResponse
 
     public async Task<GetUsersResponse> Handle(GetUsersRequest request, CancellationToken cancellationToken)
     {
-        var query = new GetUsersQuery();
+        var query = new GetUsersQuery()
+        {
+            SearchPhrase = request.SearchPhrase,
+        };
+
         var users = await _queryExecutor.Execute(query);
 
         if (users is null)
@@ -33,9 +38,12 @@ public class GetUsersHandler : IRequestHandler<GetUsersRequest, GetUsersResponse
         }
 
         var mappedUsers = _mapper.Map<List<Domain.Models.User>>(users);
+        var totalItemsCount = query.TotalItemsCount;
+        var result = new PagedResult<User>(mappedUsers, totalItemsCount, request.PageSize, request.PageNumber);
+
         var response = new GetUsersResponse()
         {
-            Data = mappedUsers
+            Data = result
         };
         return response;
     }
