@@ -14,6 +14,8 @@ public class ProductsProfile : Profile
             .ForMember(x => x.Series, y => y.MapFrom(z => z.Series))
             .ForMember(x => x.BatchSize, y => y.MapFrom(z => z.BatchSize))
             .ForMember(x => x.Description, y => y.MapFrom(z => z.Description))
+            .ForMember(x => x.Output, y => y.MapFrom(z => z.Output))
+            .ForMember(x => x.ProductionTimeStart, y => y.MapFrom(z => z.ProductionTimeStart))
             .ForMember(x => x.RealWorkingTime, y => y.MapFrom(z => z.RealWorkingTime))
             .ForMember(x => x.TabletPress, y => y.MapFrom(z => z.TabletPress.Name));
 

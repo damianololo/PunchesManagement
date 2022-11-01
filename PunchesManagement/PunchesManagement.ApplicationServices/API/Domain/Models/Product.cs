@@ -14,8 +14,10 @@ public class Product
     public string Series { get; set; }
     [MaxLength(1500)]
     public string Description { get; set; }
+    public int Output { get; set; }
     [Precision(6, 2)]
     public decimal BatchSize { get; set; }
+    public DateTime ProductionTimeStart { get; set; }
     [Precision(6, 2)]
     public decimal RealWorkingTime { get; set; }
     public string TabletPress { get; set; }

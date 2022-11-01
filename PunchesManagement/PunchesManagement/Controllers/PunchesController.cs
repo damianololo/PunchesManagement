@@ -25,14 +25,25 @@ public class PunchesController : ApiControllerBase
 
 	[HttpGet]
 	[Route("{id}")]
-	public Task<IActionResult> GetPunchesById([FromRoute]int id)
+	public Task<IActionResult> GetPunchesById([FromRoute] int id)
 	{
 		var request = new GetPunchesByIdRequest()
 		{
 			SearchId = id
 		};
-        return this.HandleRequest<GetPunchesByIdRequest, GetPunchesByIdResponse>(request);
-    }
+		return this.HandleRequest<GetPunchesByIdRequest, GetPunchesByIdResponse>(request);
+	}
+
+	//[HttpGet]
+	//[Route("{inspection}")]
+	//public Task<IActionResult> GetPunchesByAvailable([FromRoute]bool inspection)
+	//{
+	//	var request = new GetPunchesByAvailableRequest()
+	//	{
+	//		Inspection = inspection,
+	//	};
+	//	return this.HandleRequest<GetPunchesByAvailableRequest, GetPunchesByAvailableResponse>(request);
+ //   }
 
 	[HttpPost]
 	[Route("")]

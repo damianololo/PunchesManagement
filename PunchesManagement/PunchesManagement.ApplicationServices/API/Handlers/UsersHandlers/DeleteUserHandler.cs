@@ -6,7 +6,7 @@ using PunchesManagement.ApplicationServices.API.Domain.UsersServices;
 using PunchesManagement.ApplicationServices.API.ErrorHandling;
 using PunchesManagement.DataAccess.CQRS;
 using PunchesManagement.DataAccess.CQRS.Commands;
-using PunchesManagement.DataAccess.CQRS.Queries;
+using PunchesManagement.DataAccess.CQRS.Queries.UsersQuery;
 
 namespace PunchesManagement.ApplicationServices.API.Handlers.UsersHandlers;
 

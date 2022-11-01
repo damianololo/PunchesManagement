@@ -4,7 +4,7 @@ using PunchesManagement.ApplicationServices.API.Domain;
 using PunchesManagement.ApplicationServices.API.Domain.ProductsServices;
 using PunchesManagement.ApplicationServices.API.ErrorHandling;
 using PunchesManagement.DataAccess.CQRS;
-using PunchesManagement.DataAccess.CQRS.Queries;
+using PunchesManagement.DataAccess.CQRS.Queries.ProductsQuery;
 
 namespace PunchesManagement.ApplicationServices.API.Handlers.ProductsHandlers;
 

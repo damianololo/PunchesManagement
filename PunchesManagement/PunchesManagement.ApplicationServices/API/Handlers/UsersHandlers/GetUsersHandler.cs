@@ -5,7 +5,7 @@ using PunchesManagement.ApplicationServices.API.Domain.Models;
 using PunchesManagement.ApplicationServices.API.Domain.UsersServices;
 using PunchesManagement.ApplicationServices.API.ErrorHandling;
 using PunchesManagement.DataAccess.CQRS;
-using PunchesManagement.DataAccess.CQRS.Queries;
+using PunchesManagement.DataAccess.CQRS.Queries.UsersQuery;
 
 namespace PunchesManagement.ApplicationServices.API.Handlers;
 
@@ -25,6 +25,10 @@ public class GetUsersHandler : IRequestHandler<GetUsersRequest, GetUsersResponse
         var query = new GetUsersQuery()
         {
             SearchPhrase = request.SearchPhrase,
+            PageNumber = request.PageNumber,
+            PageSize = request.PageSize,
+            SortBy = request.SortBy,
+            SortDirection = request.SortDirection
         };
 
         var users = await _queryExecutor.Execute(query);

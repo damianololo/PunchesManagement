@@ -5,7 +5,7 @@ using PunchesManagement.ApplicationServices.API.Domain.Models;
 using PunchesManagement.ApplicationServices.API.Domain.PunchesServices;
 using PunchesManagement.ApplicationServices.API.ErrorHandling;
 using PunchesManagement.DataAccess.CQRS;
-using PunchesManagement.DataAccess.CQRS.Queries;
+using PunchesManagement.DataAccess.CQRS.Queries.PunchesQuery;
 
 namespace PunchesManagement.ApplicationServices.API.Handlers;
 
@@ -26,7 +26,9 @@ public class GetPunchesHandler : IRequestHandler<GetPunchesRequest, GetPunchesRe
         {
             SearchPhrase = request.SearchPhrase,
             PageNumber = request.PageNumber,
-            PageSize = request.PageSize
+            PageSize = request.PageSize,
+            SortBy = request.SortBy,
+            SortDirection = request.SortDirection
         };
 
         var punches = await _queryExecutor.Execute(query);
