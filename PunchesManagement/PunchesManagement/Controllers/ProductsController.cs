@@ -1,9 +1,11 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PunchesManagement.ApplicationServices.API.Domain.ProductsServices;
 
 namespace PunchesManagement.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("[controller]")]
 public class ProductsController : ApiControllerBase
@@ -49,6 +51,7 @@ public class ProductsController : ApiControllerBase
         return this.HandleRequest<UpdateProductRequest, UpdateProductResponse>(request);
     }
 
+    [Authorize(Roles = "admin,production_manager")]
     [HttpDelete]
     [Route("{id}")]
     public Task<IActionResult> DeleteProduct([FromRoute]int id)

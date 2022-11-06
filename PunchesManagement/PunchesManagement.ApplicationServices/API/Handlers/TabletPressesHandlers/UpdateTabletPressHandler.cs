@@ -41,15 +41,19 @@ public class UpdateTabletPressHandler : IRequestHandler<UpdateTabletPressRequest
         }
 
         var mappedTabletPress = _mapper.Map<DataAccess.Entities.TabletPress>(request);
+
         var command = new UpdateTabletPressCommand()
         {
             Parameter = mappedTabletPress,
         };
+
         var updatedTabletPress = await _commandExecutor.Execute(command);
+
         var response = new UpdateTabletPressResponse()
         {
             Data = _mapper.Map<Domain.Models.TabletPress>(updatedTabletPress)
         };
+
         return response;
     }
 }

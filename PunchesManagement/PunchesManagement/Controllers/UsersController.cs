@@ -1,10 +1,11 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PunchesManagement.ApplicationServices.API.Domain.ProductsServices;
 using PunchesManagement.ApplicationServices.API.Domain.UsersServices;
 
 namespace PunchesManagement.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("[controller]")]
 public class UsersController : ApiControllerBase
@@ -35,12 +36,22 @@ public class UsersController : ApiControllerBase
         return this.HandleRequest<GetUserByIdRequest, GetUserByIdResponse>(request);
     }
 
+    [AllowAnonymous]
     [HttpPost]
     [Route("")]
     public Task<IActionResult> AddUser([FromBody] AddUserRequest request)
     {
         return this.HandleRequest<AddUserRequest, AddUserResponse>(request);
     }
+
+    [AllowAnonymous]
+    [HttpPost]
+    [Route("login")]
+    public Task<IActionResult> Login([FromBody] LoginUserRequest request)
+    {
+        return this.HandleRequest<LoginUserRequest, LoginUserResponse>(request);
+    }
+
     [HttpPut]
     [Route("{id}")]
     public Task<IActionResult> UpdateUserById([FromRoute] int id, [FromBody] UpdateUserRequest request)
@@ -49,6 +60,7 @@ public class UsersController : ApiControllerBase
         return this.HandleRequest<UpdateUserRequest, UpdateUserResponse>(request);
     }
 
+    [Authorize(Roles = "admin,production_manager")]
     [HttpDelete]
     [Route("{id}")]
     public Task<IActionResult> DeleteUser([FromRoute] int id)

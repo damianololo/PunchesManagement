@@ -9,6 +9,7 @@ public class UpdateUserRequestValidator : AbstractValidator<UpdateUserRequest>
 	{
         RuleFor(x => x.FirstName).Length(0, 50);
         RuleFor(x => x.LastName).Length(1, 50);
+        RuleFor(x => x.Username).Length(1, 50);
         RuleFor(x => x.PasswordHash).Length(1, 50);
     }
 }

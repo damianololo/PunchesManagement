@@ -31,9 +31,9 @@ public class UpdateUserHandler : IRequestHandler<UpdateUserRequest, UpdateUserRe
         {
             SearchId = request.UpdateId
         };
-        var user = await _queryExecutor.Execute(query);
+        var getUser = await _queryExecutor.Execute(query);
 
-        if (user is null)
+        if (getUser is null)
         {
             return new UpdateUserResponse()
             {
@@ -42,15 +42,19 @@ public class UpdateUserHandler : IRequestHandler<UpdateUserRequest, UpdateUserRe
         }
 
         var mappedUser = _mapper.Map<DataAccess.Entities.User>(request);
+
         var command = new UpdateUserCommand()
         {
             Parameter = mappedUser,
         };
+
         var updatedUser = await _commandExecutor.Execute(command);
+
         var response = new UpdateUserResponse()
         {
             Data = _mapper.Map<Domain.Models.User>(updatedUser)
         };
+
         return response;
     }
 }

@@ -42,15 +42,19 @@ public class UpdateProductHandler : IRequestHandler<UpdateProductRequest, Update
 		}
 
 		var mappedProduct = _mapper.Map<DataAccess.Entities.Product>(request);
+
 		var command = new UpdateProductCommand()
 		{
 			Parameter = mappedProduct,
 		};
+
 		var updatedProduct = await _commandExecutor.Execute(command);
+
 		var response = new UpdateProductResponse()
 		{
 			Data = _mapper.Map<Domain.Models.Product>(updatedProduct)
 		};
+
 		return response;
     }
 }

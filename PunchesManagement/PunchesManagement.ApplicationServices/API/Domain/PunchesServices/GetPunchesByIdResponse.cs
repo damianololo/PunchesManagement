@@ -1,6 +1,8 @@
-﻿namespace PunchesManagement.ApplicationServices.API.Domain.PunchesServices;
+﻿using PunchesManagement.ApplicationServices.API.Domain.Models;
 
-public class GetPunchesByIdResponse : ResponseBase<Models.Punches>
+namespace PunchesManagement.ApplicationServices.API.Domain.PunchesServices;
+
+public class GetPunchesByIdResponse : ResponseBase<Punches>
 {
 
 }

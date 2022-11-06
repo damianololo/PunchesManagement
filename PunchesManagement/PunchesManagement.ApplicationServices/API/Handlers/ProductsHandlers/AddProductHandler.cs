@@ -20,11 +20,19 @@ public class AddProductHandler : IRequestHandler<AddProductRequest, AddProductRe
     public async Task<AddProductResponse> Handle(AddProductRequest request, CancellationToken cancellationToken)
     {
         var product = _mapper.Map<DataAccess.Entities.Product>(request);
-        var command = new AddProductCommand() { Parameter = product };
+
+        var command = new AddProductCommand()
+        {
+            Parameter = product
+        };
+
         var punchesFromDb = await _commandExecutor.Execute(command);
-        return new AddProductResponse()
+
+        var response = new AddProductResponse()
         {
             Data = _mapper.Map<Domain.Models.Product>(punchesFromDb)
         };
+
+        return response;
     }
 }

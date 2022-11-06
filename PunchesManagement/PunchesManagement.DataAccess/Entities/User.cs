@@ -11,6 +11,8 @@ public class User : EntityBase
     public string LastName { get; set; }
     [MaxLength(50)]
     [Required]
+    public string UserName { get; set; }
+    [Required]
     public string PasswordHash { get; set; }
 
     public UserRole UserRole { get; set; }

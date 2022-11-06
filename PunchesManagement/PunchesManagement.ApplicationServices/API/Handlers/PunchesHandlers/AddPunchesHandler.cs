@@ -20,12 +20,19 @@ public class AddPunchesHandler : IRequestHandler<AddPunchesRequest, AddPunchesRe
     public async Task<AddPunchesResponse> Handle(AddPunchesRequest request, CancellationToken cancellationToken)
     {
         var punches = _mapper.Map<DataAccess.Entities.Punches>(request);
-        var command = new AddPunchesCommand() { Parameter = punches };
+
+        var command = new AddPunchesCommand() 
+        {
+            Parameter = punches 
+        };
+
         var punchesFromDb = await _commandExecutor.Execute(command);
 
-        return new AddPunchesResponse()
+        var response = new AddPunchesResponse()
         {
             Data = _mapper.Map<Domain.Models.Punches>(punchesFromDb)
         };
+
+        return response;
     }
 }

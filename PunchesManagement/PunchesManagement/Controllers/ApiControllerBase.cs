@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using PunchesManagement.ApplicationServices.API.Domain;
 using PunchesManagement.ApplicationServices.API.ErrorHandling;
 using System.Net;
+using System.Security.Claims;
 
 namespace PunchesManagement.Controllers;
 
@@ -32,7 +33,11 @@ public class ApiControllerBase : ControllerBase
 				}));
 		}
 
-		var response = await _mediator.Send(request);
+        var nameIdentifier = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var userName = this.User.FindFirstValue(ClaimTypes.Name);
+        var role = this.User.FindFirstValue(ClaimTypes.Role);
+
+        var response = await _mediator.Send(request);
 		if (response.Error != null)
 		{
             return this.ErrorResponse(response.Error);

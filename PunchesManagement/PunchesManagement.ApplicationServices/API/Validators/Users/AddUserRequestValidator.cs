@@ -7,8 +7,11 @@ public class AddUserRequestValidator : AbstractValidator<AddUserRequest>
 {
     public AddUserRequestValidator()
     {
-        RuleFor(x => x.FirstName).Length(0, 50);
         RuleFor(x => x.LastName).Length(1, 50);
-        RuleFor(x => x.PasswordHash).Length(1, 50);
+        RuleFor(x => x.Username).Length(1, 50);
+        RuleFor(x => x.Password).NotEmpty();
+        RuleFor(x => x.ConfirmPassword)
+            .Equal(e => e.Password)
+            .WithMessage("Passwords cannot be different!");
     }
 }

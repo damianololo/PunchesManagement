@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
 using PunchesManagement.ApplicationServices.API.Domain;
-using PunchesManagement.ApplicationServices.API.Domain.ProductsServices;
 using PunchesManagement.ApplicationServices.API.Domain.UsersServices;
 using PunchesManagement.ApplicationServices.API.ErrorHandling;
 using PunchesManagement.DataAccess.CQRS;

@@ -46,19 +46,19 @@ public class DataSeeder
             {
                 new UserRole()
                 {
-                    Name = "Operator"
+                    Name = "admin"
                 },
                 new UserRole()
                 {
-                    Name = "Mistrz zmianowy"
+                    Name = "production_manager"
                 },
                 new UserRole()
                 {
-                    Name = "Kierownik produkcji"
+                    Name = "foreman"
                 },
                 new UserRole()
                 {
-                    Name = "Admin"
+                    Name = "machine_operator"
                 }
             };
 

@@ -42,15 +42,19 @@ public class UpdatePunchesHandler : IRequestHandler<UpdatePunchesRequest, Update
         }
 
         var mappedPunches = _mapper.Map<DataAccess.Entities.Punches>(request);
+
         var command = new UpdatePunchesCommand()
         {
             Parameter = mappedPunches,
         };
+
         var updatedPunches = await _commandExecutor.Execute(command);
+
         var response = new UpdatePunchesResponse()
         {
             Data = _mapper.Map<Domain.Models.Punches>(updatedPunches)
         };
+
         return response;
     }
 }

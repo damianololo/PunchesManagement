@@ -1,9 +1,11 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PunchesManagement.ApplicationServices.API.Domain.TabletPressServices;
 
 namespace PunchesManagement.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("[controller]")]
 public class TabletPressesController : ApiControllerBase
@@ -48,6 +50,7 @@ public class TabletPressesController : ApiControllerBase
         return this.HandleRequest<UpdateTabletPressRequest, UpdateTabletPressResponse>(request);
     }
 
+    [Authorize(Roles = "admin,production_manager")]
     [HttpDelete]
     [Route("{id}")]
     public Task<IActionResult> DeleteTabletPress([FromRoute] int id)

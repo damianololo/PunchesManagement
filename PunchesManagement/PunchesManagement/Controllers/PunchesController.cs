@@ -1,9 +1,11 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PunchesManagement.ApplicationServices.API.Domain.PunchesServices;
 
 namespace PunchesManagement.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("[controller]")]
 public class PunchesController : ApiControllerBase
@@ -59,7 +61,8 @@ public class PunchesController : ApiControllerBase
         return this.HandleRequest<UpdatePunchesRequest, UpdatePunchesResponse>(request);
 	}
 
-	[HttpDelete]
+    [Authorize(Roles = "admin,production_manager")]
+    [HttpDelete]
 	[Route("{id}")]
 	public Task<IActionResult> DeletePunches([FromRoute]int id)
 	{
