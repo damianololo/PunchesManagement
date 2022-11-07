@@ -25,6 +25,18 @@ builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
 builder.Host.UseNLog();
 
 // Add services to the container.
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+        builder =>
+        {
+            builder
+            .AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+        });
+});
+
 builder.Services.AddAuthentication("BasicAuthentication")
     .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
 builder.Services.AddScoped<IPasswordHasher<User>, BCryptPasswordHasher<User>>();
@@ -78,7 +90,7 @@ seeder.Seed();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    //app.UseDeveloperExceptionPage();
+    app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
@@ -86,6 +98,7 @@ if (app.Environment.IsDevelopment())
 app.UseAuthentication();
 app.UseHttpsRedirection();
 app.UseRouting();
+app.UseCors();
 app.UseAuthorization();
 
 app.MapControllers();

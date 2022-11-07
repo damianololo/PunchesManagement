@@ -2,7 +2,7 @@
 
 namespace PunchesManagement.ApplicationServices.API.Domain.TabletPressServices;
 
-public class GetTabletPressesRequest : IRequest<GetTabletPressesResponse>
+public class GetTabletPressesRequest : RequestBase, IRequest<GetTabletPressesResponse>
 {
     public string? SearchPhrase { get; set; }
 }

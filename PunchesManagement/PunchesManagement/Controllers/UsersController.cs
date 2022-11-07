@@ -46,7 +46,7 @@ public class UsersController : ApiControllerBase
 
     [AllowAnonymous]
     [HttpPost]
-    [Route("login")]
+    [Route("authenticate")]
     public Task<IActionResult> Login([FromBody] LoginUserRequest request)
     {
         return this.HandleRequest<LoginUserRequest, LoginUserResponse>(request);

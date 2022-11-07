@@ -1,9 +1,8 @@
 ﻿using MediatR;
-using System.ComponentModel.DataAnnotations;
 
 namespace PunchesManagement.ApplicationServices.API.Domain.TabletPressServices;
 
-public class AddTabletPressRequest : IRequest<AddTabletPressResponse>
+public class AddTabletPressRequest : RequestBase, IRequest<AddTabletPressResponse>
 {
     public string Name { get; set; }
     public string Producer { get; set; }

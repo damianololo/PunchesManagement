@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PunchesManagement.ApplicationServices.API.Domain.PunchesServices;
 
-public class AddPunchesRequest : IRequest<AddPunchesResponse>
+public class AddPunchesRequest : RequestBase, IRequest<AddPunchesResponse>
 {
     public string Size { get; set; }
     public string Series { get; set; }

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PunchesManagement.ApplicationServices.API.Domain.ProductsServices;
 
-public class AddProductRequest : IRequest<AddProductResponse>
+public class AddProductRequest : RequestBase, IRequest<AddProductResponse>
 {
     public string Name { get; set; }
     public string Series { get; set; }

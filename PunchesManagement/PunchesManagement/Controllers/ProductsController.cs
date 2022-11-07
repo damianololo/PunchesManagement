@@ -24,7 +24,7 @@ public class ProductsController : ApiControllerBase
 	{
 		return this.HandleRequest<GetProductsRequest, GetProductsResponse>(request);
 	}
-
+    
     [HttpGet]
     [Route("{id}")]
 	public Task<IActionResult> GetProductById([FromRoute]int id)

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PunchesManagement.ApplicationServices.API.Domain.TabletPressServices;
 
-public class UpdateTabletPressRequest : IRequest<UpdateTabletPressResponse>
+public class UpdateTabletPressRequest : RequestBase, IRequest<UpdateTabletPressResponse>
 {
     public int UpdateId { get; set; }
     public string Name { get; set; }

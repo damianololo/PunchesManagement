@@ -3,7 +3,7 @@ using PunchesManagement.DataAccess.Enums;
 
 namespace PunchesManagement.ApplicationServices.API.Domain.ProductsServices;
 
-public class GetProductsRequest : IRequest<GetProductsResponse>
+public class GetProductsRequest : RequestBase, IRequest<GetProductsResponse>
 {
     public string ?SearchPhrase { get; set; }
     public int PageNumber { get; set; }

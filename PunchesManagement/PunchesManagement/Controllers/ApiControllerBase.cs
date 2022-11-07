@@ -33,9 +33,12 @@ public class ApiControllerBase : ControllerBase
 				}));
 		}
 
-        var nameIdentifier = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-        var userName = this.User.FindFirstValue(ClaimTypes.Name);
-        var role = this.User.FindFirstValue(ClaimTypes.Role);
+        if (User.Claims.FirstOrDefault() != null)
+        {
+            (request as RequestBase).AuthenticationIdentifier = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            (request as RequestBase).AuthenticationUserName = User.FindFirstValue(ClaimTypes.Name);
+            (request as RequestBase).AuthenticationRole = User.FindFirstValue(ClaimTypes.Role);
+        }
 
         var response = await _mediator.Send(request);
 		if (response.Error != null)

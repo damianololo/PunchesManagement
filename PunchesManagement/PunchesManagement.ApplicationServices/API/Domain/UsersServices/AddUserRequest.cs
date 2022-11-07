@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PunchesManagement.ApplicationServices.API.Domain.UsersServices;
 
-public class AddUserRequest : IRequest<AddUserResponse>
+public class AddUserRequest : RequestBase, IRequest<AddUserResponse>
 {
     public string LastName { get; set; }
     public string Username { get; set; }

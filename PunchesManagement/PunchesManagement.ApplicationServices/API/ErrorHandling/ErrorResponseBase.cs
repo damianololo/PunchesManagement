@@ -1,4 +1,4 @@
-﻿namespace PunchesManagement.ApplicationServices.API.Domain;
+﻿namespace PunchesManagement.ApplicationServices.API.ErrorHandling;
 
 public class ErrorResponseBase
 {

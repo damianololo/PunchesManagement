@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PunchesManagement.ApplicationServices.API.Domain.PunchesServices;
 
-public class UpdatePunchesRequest : IRequest<UpdatePunchesResponse>
+public class UpdatePunchesRequest : RequestBase, IRequest<UpdatePunchesResponse>
 {
     public int UpdateId { get; set; }
     public string Size { get; set; }

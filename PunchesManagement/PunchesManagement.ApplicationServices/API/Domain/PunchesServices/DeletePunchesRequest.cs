@@ -2,7 +2,7 @@
 
 namespace PunchesManagement.ApplicationServices.API.Domain.PunchesServices;
 
-public class DeletePunchesRequest : IRequest<DeletePunchesResponse>
+public class DeletePunchesRequest : RequestBase, IRequest<DeletePunchesResponse>
 {
     public int DeleteId { get; set; }
 }

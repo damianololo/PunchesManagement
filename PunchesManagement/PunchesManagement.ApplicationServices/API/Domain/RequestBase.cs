@@ -1,14 +1,8 @@
-﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace PunchesManagement.ApplicationServices.API.Domain;
 
-namespace PunchesManagement.ApplicationServices.API.Domain
+public class RequestBase
 {
-    public class RequestBase<T> : IRequest<T>
-    {
-
-    }
+    public int AuthenticationIdentifier { get; set; }
+    public string ?AuthenticationUserName { get; set; }
+    public string ?AuthenticationRole { get; set; }
 }
