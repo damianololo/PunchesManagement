@@ -9,9 +9,6 @@ namespace PunchesManagement.ApplicationServices.API.Validators.Users
         {
             RuleFor(x => x.UserName).Length(1, 50);
             RuleFor(x => x.Password).NotEmpty();
-            RuleFor(x => x.ConfirmPassword)
-                .Equal(e => e.Password)
-                .WithMessage("Passwords cannot be different!");
         }
     }
 }
